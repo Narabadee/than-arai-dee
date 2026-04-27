@@ -3,3 +3,4 @@ dist
 server/night-market.db
 server/night-market.db-wal
 server/night-market.db-shm
+.claude/
