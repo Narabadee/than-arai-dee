@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useChat } from '../context/ChatContext';
 import { fetchUserProfile, updateProfile, changePassword } from '../api/users';
+import { Post } from '../data/types';
 
 export const Profile: React.FC = () => {
   const { username } = useParams();
@@ -446,7 +447,7 @@ export const Profile: React.FC = () => {
                       <button onClick={() => navigate('/social')} className="mt-4 text-nm-yellow text-[13px] hover:underline">Go to community →</button>
                     </div>
                   ) : (
-                    userPosts.map((p, i) => {
+                    userPosts.map((p: Post, i: number) => {
                       const isLiked = likedPosts.has(p.id);
                       const commentsOpen = expandedComments === p.id;
                       const comments = localComments[p.id] ?? [];
