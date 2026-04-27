@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsx:*)",
+      "Bash(curl -s http://localhost:3001/api/health)",
+      "Bash(curl -s http://localhost:3001/api/dishes)",
+      "Bash(curl -s http://localhost:3001/api/auth/login -X POST -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"1234\"}')",
+      "Bash(curl -s http://localhost:3001/api/posts)",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f'{len\\(data\\)} posts loaded'\\)\")",
+      "Bash(curl -s http://localhost:3001/api/reviews/krapow)",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(f'{len\\(data\\)} reviews for krapow'\\)\")",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite:*)",
+      "Bash(python -c \"import sys,json; posts=json.load\\(sys.stdin\\); p=posts[0]; print\\('user:', p.get\\('user'\\)\\); print\\('comments:', p.get\\('comments'\\)\\); print\\('user_id present:', 'user_id' in p\\)\")",
+      "Bash(pkill -f \"tsx server/index.ts\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr :3001)",
+      "Bash(taskkill:*)",
+      "Bash(cmd:*)",
+      "Bash(python -c \"import sys,json; posts=json.load\\(sys.stdin\\); p=posts[0]; print\\('user:', p.get\\('user'\\)\\); print\\('comments:', p.get\\('comments'\\)\\)\")",
+      "Bash(python -c \"import sys,json; posts=json.load\\(sys.stdin\\); print\\(list\\(posts[0].keys\\(\\)\\)\\)\")"
+    ]
+  }
+}

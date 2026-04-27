@@ -1,0 +1,254 @@
+// Shared mock data for all three visual directions.
+// Recipes, ingredients, trending, reviews.
+
+const INGREDIENTS = [
+  // Proteins
+  { id:'chicken',  en:'Chicken',    th:'ไก่',       cat:'protein', emoji:'🍗' },
+  { id:'pork',     en:'Pork',       th:'หมู',       cat:'protein', emoji:'🥩' },
+  { id:'beef',     en:'Beef',       th:'เนื้อ',      cat:'protein', emoji:'🥩' },
+  { id:'shrimp',   en:'Shrimp',     th:'กุ้ง',       cat:'protein', emoji:'🦐' },
+  { id:'egg',      en:'Eggs',       th:'ไข่',       cat:'protein', emoji:'🥚' },
+  { id:'tofu',     en:'Tofu',       th:'เต้าหู้',     cat:'protein', emoji:'🧈' },
+  // Produce
+  { id:'garlic',   en:'Garlic',     th:'กระเทียม',  cat:'produce', emoji:'🧄' },
+  { id:'chili',    en:'Thai chili', th:'พริก',      cat:'produce', emoji:'🌶️' },
+  { id:'basil',    en:'Holy basil', th:'กะเพรา',    cat:'produce', emoji:'🌿' },
+  { id:'lime',     en:'Lime',       th:'มะนาว',     cat:'produce', emoji:'🟢' },
+  { id:'lemongrass', en:'Lemongrass', th:'ตะไคร้', cat:'produce', emoji:'🌾' },
+  { id:'galangal', en:'Galangal',   th:'ข่า',       cat:'produce', emoji:'🫚' },
+  { id:'onion',    en:'Onion',      th:'หอมใหญ่',   cat:'produce', emoji:'🧅' },
+  { id:'tomato',   en:'Tomato',     th:'มะเขือเทศ', cat:'produce', emoji:'🍅' },
+  { id:'mushroom', en:'Mushroom',   th:'เห็ด',      cat:'produce', emoji:'🍄' },
+  { id:'carrot',   en:'Carrot',     th:'แครอท',     cat:'produce', emoji:'🥕' },
+  // Pantry
+  { id:'rice',     en:'Jasmine rice', th:'ข้าว',    cat:'pantry', emoji:'🍚' },
+  { id:'noodle',   en:'Rice noodle', th:'เส้นก๋วยเตี๋ยว', cat:'pantry', emoji:'🍜' },
+  { id:'fishsauce', en:'Fish sauce', th:'น้ำปลา',   cat:'pantry', emoji:'🐟' },
+  { id:'oyster',   en:'Oyster sauce', th:'ซอสหอยนางรม', cat:'pantry', emoji:'🫙' },
+  { id:'coconut',  en:'Coconut milk', th:'กะทิ',   cat:'pantry', emoji:'🥥' },
+  { id:'sugar',    en:'Palm sugar', th:'น้ำตาลปี๊บ',  cat:'pantry', emoji:'🍯' },
+];
+
+const ING = Object.fromEntries(INGREDIENTS.map(i => [i.id, i]));
+
+const DISHES = [
+  {
+    id:'krapow',
+    en:'Pad Krapow', th:'ผัดกะเพรา',
+    tag:'stirfry', time:15, spicy:4, difficulty:1, kcal:520, vegan:false, meal:'lunch',
+    ingredients:['chicken','garlic','chili','basil','fishsauce','oyster','egg','rice'],
+    desc:'Street-food classic. Pork or chicken, holy basil, fire.',
+    rating:4.8, reviews:1284, trending:1, color:'#D64528',
+    steps:[
+      { t:'Pound', d:'Mortar 4 cloves garlic + 6 birds-eye chilies to a rough paste.' },
+      { t:'Fire', d:'Wok on high. 2 tbsp oil. Paste in, 10 seconds until fragrant.' },
+      { t:'Protein', d:'Add 200g minced chicken. Sear hard, break apart. 2 min.' },
+      { t:'Season', d:'1 tbsp oyster, 1 tbsp fish sauce, 1 tsp sugar. Splash of stock.' },
+      { t:'Basil', d:'Handful holy basil. Toss once. Off heat.' },
+      { t:'Plate', d:'Over rice. Fry an egg until the edges frizzle. Done.' },
+    ],
+  },
+  {
+    id:'tomyum',
+    en:'Tom Yum Goong', th:'ต้มยำกุ้ง',
+    tag:'soup', time:25, spicy:4, difficulty:2, kcal:310, vegan:false, meal:'dinner',
+    ingredients:['shrimp','lemongrass','galangal','lime','chili','mushroom','fishsauce'],
+    desc:'Hot-sour prawn soup. Aromatic, bright, unforgettable.',
+    rating:4.9, reviews:2010, trending:2, color:'#E8823A',
+    steps:[
+      { t:'Stock', d:'Simmer shrimp shells in 3 cups water, 10 min. Strain.' },
+      { t:'Aromatics', d:'Add bruised lemongrass, 4 slices galangal, kaffir lime leaves.' },
+      { t:'Build', d:'Mushrooms in. Then shrimp. Cook just until pink.' },
+      { t:'Season', d:'Off heat: 2 tbsp fish sauce, 3 tbsp lime, chilies crushed.' },
+      { t:'Serve', d:'Taste. Should be equal parts sour, salty, spicy.' },
+    ],
+  },
+  {
+    id:'friedrice',
+    en:'Thai Fried Rice', th:'ข้าวผัด',
+    tag:'rice', time:10, spicy:1, difficulty:1, kcal:480, vegan:false, meal:'lunch',
+    ingredients:['rice','egg','garlic','onion','carrot','fishsauce'],
+    desc:'The ten-minute answer to leftover rice.',
+    rating:4.6, reviews:890, trending:3, color:'#E8B13A',
+    steps:[
+      { t:'Prep', d:'Day-old rice, cold. Garlic minced. Egg cracked.' },
+      { t:'Egg', d:'Hot wok, oil, egg. Scramble soft. Push aside.' },
+      { t:'Rice', d:'Garlic, then rice. Toss until every grain is glossy.' },
+      { t:'Season', d:'Fish sauce drizzled around the rim of the wok.' },
+      { t:'Finish', d:'Scallions in. Cucumber + lime on the side.' },
+    ],
+  },
+  {
+    id:'boatnoodle',
+    en:'Boat Noodle', th:'ก๋วยเตี๋ยวเรือ',
+    tag:'noodle', time:45, spicy:3, difficulty:3, kcal:390, vegan:false, meal:'dinner',
+    ingredients:['noodle','beef','garlic','chili','basil'],
+    desc:'Deep, dark, five-spice beef broth. Tiny bowl, infinite refills.',
+    rating:4.7, reviews:612, trending:5, color:'#8B2E2E',
+    steps:[
+      { t:'Broth', d:'Beef bones + star anise + cinnamon. Low simmer, 3 hours.' },
+      { t:'Blanch', d:'Rice noodles into boiling water 15 seconds.' },
+      { t:'Assemble', d:'Noodles, sliced beef, meatballs. Broth poured over.' },
+      { t:'Top', d:'Crispy garlic, cilantro, a spoon of pork blood (optional).' },
+    ],
+  },
+  {
+    id:'greencurry',
+    en:'Green Curry', th:'แกงเขียวหวาน',
+    tag:'curry', time:30, spicy:3, difficulty:2, kcal:560, vegan:false, meal:'dinner',
+    ingredients:['chicken','coconut','basil','chili','garlic','fishsauce','sugar'],
+    desc:'Creamy, fragrant. The colour of a Thai forest after rain.',
+    rating:4.8, reviews:1450, trending:4, color:'#4A7A3E',
+    steps:[
+      { t:'Crack', d:'Thick coconut cream in a pan until the oil splits out.' },
+      { t:'Fry', d:'3 tbsp green curry paste. Fry until paste bleeds oil.' },
+      { t:'Simmer', d:'Chicken in. Then thin coconut milk. 10 minutes.' },
+      { t:'Season', d:'Fish sauce, palm sugar. Thai eggplant if you have it.' },
+      { t:'Finish', d:'Basil, sliced chili. Off heat immediately.' },
+    ],
+  },
+  {
+    id:'padthai',
+    en:'Pad Thai', th:'ผัดไทย',
+    tag:'noodle', time:20, spicy:2, difficulty:2, kcal:620, vegan:false, meal:'lunch',
+    ingredients:['noodle','shrimp','egg','garlic','tofu','fishsauce','sugar','lime'],
+    desc:'Tamarind-sweet, wok-smoky. Crushed peanuts on top.',
+    rating:4.7, reviews:2340, trending:6, color:'#E8823A',
+    steps:[
+      { t:'Soak', d:'Dried rice noodles, warm water 20 min until pliable.' },
+      { t:'Sauce', d:'Tamarind + palm sugar + fish sauce, equal parts.' },
+      { t:'Wok', d:'Tofu + shrimp seared. Push aside. Scramble egg.' },
+      { t:'Noodle', d:'Drained noodles + sauce. Toss hard until sticky-glossy.' },
+      { t:'Top', d:'Bean sprouts, peanuts, lime wedge, chili flakes.' },
+    ],
+  },
+  {
+    id:'somtum',
+    en:'Som Tum', th:'ส้มตำ',
+    tag:'salad', time:10, spicy:5, difficulty:1, kcal:180, vegan:true, meal:'lunch',
+    ingredients:['garlic','chili','lime','fishsauce','sugar','tomato','carrot'],
+    desc:'Green papaya salad. Sour, spicy, sweet. Loud pounding.',
+    rating:4.9, reviews:1890, trending:7, color:'#4A7A3E',
+    steps:[
+      { t:'Pound', d:'Garlic + chilies in the mortar. Few cracks.' },
+      { t:'Build', d:'Lime, fish sauce, palm sugar. Bruise, don\'t puree.' },
+      { t:'Toss', d:'Shredded papaya + tomato + long beans. Bruise gently.' },
+      { t:'Serve', d:'Piled high. Sticky rice on the side. Eat immediately.' },
+    ],
+  },
+  {
+    id:'panang',
+    en:'Panang Curry', th:'พะแนง',
+    tag:'curry', time:35, spicy:2, difficulty:2, kcal:510, vegan:false, meal:'dinner',
+    ingredients:['beef','coconut','chili','basil','sugar','fishsauce'],
+    desc:'Thick, peanutty, rich. Less soupy than its green cousin.',
+    rating:4.7, reviews:980, trending:8, color:'#A84D2E',
+    steps:[
+      { t:'Paste', d:'Fry panang paste in thick coconut cream, 5 min.' },
+      { t:'Beef', d:'Sliced thin. Quick sear. Do not overcook.' },
+      { t:'Reduce', d:'Low simmer until sauce coats a spoon.' },
+      { t:'Finish', d:'Kaffir lime leaves julienned over top.' },
+    ],
+  },
+  {
+    id:'mangosticky',
+    en:'Mango Sticky Rice', th:'ข้าวเหนียวมะม่วง',
+    tag:'dessert', time:40, spicy:0, difficulty:2, kcal:440, vegan:true, meal:'dessert',
+    ingredients:['rice','coconut','sugar'],
+    desc:'Sweet warm coconut rice. Cold ripe mango. Summer in a bowl.',
+    rating:4.9, reviews:1670, trending:9, color:'#F0C445',
+    steps:[
+      { t:'Soak', d:'Sticky rice 2 hours in cold water.' },
+      { t:'Steam', d:'30 min over boiling water, cloth-lined basket.' },
+      { t:'Sauce', d:'Coconut milk + palm sugar + pinch salt, warmed.' },
+      { t:'Dress', d:'Hot rice bathed in sauce. Rest 10 min.' },
+      { t:'Serve', d:'Sliced mango alongside. Toasted mung beans on top.' },
+    ],
+  },
+  {
+    id:'larbgai',
+    en:'Larb Gai', th:'ลาบไก่',
+    tag:'salad', time:20, spicy:4, difficulty:2, kcal:290, vegan:false, meal:'dinner',
+    ingredients:['chicken','lime','chili','fishsauce','onion'],
+    desc:'Isaan-style minced chicken salad. Toasted rice powder is the secret.',
+    rating:4.6, reviews:540, trending:10, color:'#B04A2E',
+    steps:[
+      { t:'Toast', d:'Raw sticky rice in dry pan until golden. Grind coarse.' },
+      { t:'Cook', d:'Minced chicken in splash of stock. No oil.' },
+      { t:'Dress', d:'Lime, fish sauce, chili flakes, shallot, mint.' },
+      { t:'Rice powder', d:'Stirred in at the end. It is the whole point.' },
+    ],
+  },
+  {
+    id:'khaosoi',
+    en:'Khao Soi', th:'ข้าวซอย',
+    tag:'noodle', time:50, spicy:2, difficulty:3, kcal:640, vegan:false, meal:'dinner',
+    ingredients:['noodle','chicken','coconut','chili','lime','onion'],
+    desc:'Chiang Mai coconut curry noodles. Soft noodles below, crispy on top.',
+    rating:4.9, reviews:1120, trending:11, color:'#E89A3A',
+    steps:[
+      { t:'Curry', d:'Khao soi paste + coconut milk. Chicken thighs, simmer 30 min.' },
+      { t:'Noodle', d:'Egg noodles boiled soft. Half reserved, half fried crispy.' },
+      { t:'Bowl', d:'Soft noodles, curry, chicken. Crispy nest on top.' },
+      { t:'Table', d:'Pickled mustard, shallot, lime, chili oil. DIY.' },
+    ],
+  },
+  {
+    id:'tofustir',
+    en:'Pad Pak Tofu', th:'ผัดผักเต้าหู้',
+    tag:'stirfry', time:12, spicy:1, difficulty:1, kcal:340, vegan:true, meal:'lunch',
+    ingredients:['tofu','garlic','mushroom','carrot','oyster','onion'],
+    desc:'Vegetable stir-fry with silken tofu. Weeknight hero.',
+    rating:4.4, reviews:410, trending:12, color:'#4A7A3E',
+    steps:[
+      { t:'Prep', d:'Tofu pressed dry, cubed. Veg cut bite-size.' },
+      { t:'Sear', d:'Tofu until golden on all sides. Out.' },
+      { t:'Fry', d:'Garlic, harder veg first, softer last.' },
+      { t:'Finish', d:'Tofu back in. Sauce. 30 seconds and out.' },
+    ],
+  },
+];
+
+const DISH_BY_ID = Object.fromEntries(DISHES.map(d => [d.id, d]));
+
+// Default "my fridge" for the demo
+const DEFAULT_FRIDGE = ['chicken','egg','garlic','chili','basil','rice','fishsauce','oyster','lime','onion','tomato'];
+
+const DISH_TYPES = [
+  { id:'all',      th:'ทั้งหมด',    en:'All' },
+  { id:'noodle',   th:'เส้น',       en:'Noodle' },
+  { id:'soup',     th:'ซุป',        en:'Soup' },
+  { id:'curry',    th:'แกง',        en:'Curry' },
+  { id:'stirfry',  th:'ผัด',        en:'Stir-fry' },
+  { id:'rice',     th:'ข้าว',       en:'Rice' },
+  { id:'salad',    th:'ยำ',         en:'Salad' },
+  { id:'dessert',  th:'ของหวาน',    en:'Dessert' },
+];
+
+// Social posts
+const POSTS = [
+  { id:'p1', user:'@nim_eats', avatar:'N', dish:'Lazy Krapow (no basil edition)',
+    caption:'Out of holy basil, subbed Thai basil. Heresy? Maybe. Delicious? Also yes.',
+    likes:342, comments:28, rating:4.5, color:'#D64528' },
+  { id:'p2', user:'@bangkok.boy', avatar:'B', dish:'Tom Yum but creamy (nam khon)',
+    caption:'Added evap milk at the end. Controversial but my mom approved.',
+    likes:891, comments:67, rating:4.8, color:'#E8823A' },
+  { id:'p3', user:'@veggie.joom', avatar:'V', dish:'Mushroom Larb (fully vegan)',
+    caption:'King oyster mushrooms hand-chopped. Toasted rice powder non-negotiable.',
+    likes:234, comments:19, rating:4.6, color:'#4A7A3E' },
+  { id:'p4', user:'@dad.cooks', avatar:'D', dish:'Khao Pad with pineapple',
+    caption:'Daughter requested the hollowed-pineapple presentation. Dad delivers.',
+    likes:1203, comments:142, rating:4.9, color:'#E8B13A' },
+];
+
+// Reviews for recipe detail
+const REVIEWS = [
+  { user:'@thai_mom', avatar:'T', stars:5, when:'2d',
+    text:'Exactly like my grandmother made it. Make sure your wok is screaming hot.' },
+  { user:'@firsttrycook', avatar:'F', stars:4, when:'5d',
+    text:'Subbed Italian basil and it still slapped. Halved the chili for the kids.' },
+  { user:'@spicylord', avatar:'S', stars:5, when:'1w',
+    text:'Doubled the chili. Cried through dinner. No regrets. Will do again.' },
+];
+
+Object.assign(window, { INGREDIENTS, ING, DISHES, DISH_BY_ID, DEFAULT_FRIDGE, DISH_TYPES, POSTS, REVIEWS });
