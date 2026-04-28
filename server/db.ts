@@ -9,4 +9,5 @@ export const sql = postgres(process.env.DATABASE_URL, {
   max: 3,              // small pool — serverless friendly
   idle_timeout: 20,
   connect_timeout: 10,
+  prepare: false,      // required for Supabase PgBouncer (transaction mode)
 });
