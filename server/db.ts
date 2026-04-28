@@ -1,13 +1,14 @@
 import postgres from 'postgres';
+import 'dotenv/config';
 
 if (!process.env.DATABASE_URL) {
+  console.error('[DB] Error: DATABASE_URL is missing!');
   throw new Error('DATABASE_URL environment variable is not set.');
 }
 
-export const sql = postgres(process.env.DATABASE_URL, {
+console.log('[DB] Connecting to:', process.env.DATABASE_URL.split('@')[1]); // Log host only for safety
+
+export const sql = postgres(process.env.DATABASE_URL, { 
   ssl: 'require',
-  max: 3,              // small pool — serverless friendly
-  idle_timeout: 20,
-  connect_timeout: 10,
-  prepare: false,      // required for Supabase PgBouncer (transaction mode)
+  prepare: false
 });

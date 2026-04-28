@@ -7,15 +7,56 @@ export const dishesRouter = Router();
 async function buildDish(row: any) {
   const ingredients = (await sql`SELECT ingredient_id FROM dish_ingredients WHERE dish_id = ${row.id}`).map((r: any) => r.ingredient_id);
   const steps = (await sql`SELECT title, description FROM dish_steps WHERE dish_id = ${row.id} ORDER BY sort_order`).map((s: any) => ({ t: s.title, d: s.description }));
-  return { ...row, vegan: !!row.vegan, ingredients, steps };
+  return { 
+    ...row, 
+    vegan: !!row.vegan, 
+    ingredients, 
+    steps,
+    kcal: Number(row.kcal),
+    rating: Number(row.rating),
+    reviews: Number(row.reviews),
+    time: Number(row.time),
+    spicy: Number(row.spicy),
+    difficulty: Number(row.difficulty)
+  };
 }
 
 dishesRouter.get('/', async (_req: Request, res: Response) => {
   try {
-    const rows = await sql`SELECT * FROM dishes WHERE status != 'Hidden'`;
-    const dishes = await Promise.all(rows.map(buildDish));
-    res.json(dishes);
+    const dishes = await sql`
+      SELECT 
+        d.*,
+        COALESCE(
+          (SELECT json_agg(json_build_object('t', title, 'd', description) ORDER BY sort_order)
+           FROM dish_steps 
+           WHERE dish_id = d.id),
+          '[]'
+        ) as steps,
+        COALESCE(
+          (SELECT json_agg(ingredient_id)
+           FROM dish_ingredients 
+           WHERE dish_id = d.id),
+          '[]'
+        ) as ingredients
+      FROM dishes d
+      WHERE d.status != 'Hidden'
+    `;
+    
+    // Ensure boolean and number types are correct
+    const formattedDishes = dishes.map(d => ({
+      ...d,
+      vegan: !!d.vegan,
+      kcal: Number(d.kcal),
+      rating: Number(d.rating),
+      reviews: Number(d.reviews),
+      time: Number(d.time),
+      spicy: Number(d.spicy),
+      difficulty: Number(d.difficulty)
+    }));
+
+    res.json(formattedDishes);
   } catch (e) {
+    console.error('[API] Error fetching dishes:', e);
     res.status(500).json({ error: 'Failed to fetch dishes' });
   }
 });
