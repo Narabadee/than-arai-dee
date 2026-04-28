@@ -38,7 +38,7 @@ const DISHES = [
     tag:'stirfry', time:15, spicy:4, difficulty:1, kcal:520, vegan:false, meal:'lunch',
     ingredients:['chicken','garlic','chili','basil','fishsauce','oyster','egg','rice'],
     desc:'Street-food classic. Pork or chicken, holy basil, fire.',
-    rating:4.8, reviews:1284, trending:1, color:'#D64528',
+    rating:4.8, reviews:1284, trending:1, color:'#D64528', youtube:'https://www.youtube.com/watch?v=kYvV95-uN8E',
     steps:[
       { t:'Pound', d:'Mortar 4 cloves garlic + 6 birds-eye chilies to a rough paste.' },
       { t:'Fire', d:'Wok on high. 2 tbsp oil. Paste in, 10 seconds until fragrant.' },
@@ -54,7 +54,7 @@ const DISHES = [
     tag:'soup', time:25, spicy:4, difficulty:2, kcal:310, vegan:false, meal:'dinner',
     ingredients:['shrimp','lemongrass','galangal','lime','chili','mushroom','fishsauce'],
     desc:'Hot-sour prawn soup. Aromatic, bright, unforgettable.',
-    rating:4.9, reviews:2010, trending:2, color:'#E8823A',
+    rating:4.9, reviews:2010, trending:2, color:'#E8823A', youtube:'https://www.youtube.com/watch?v=5Wd-45mU9yY',
     steps:[
       { t:'Stock', d:'Simmer shrimp shells in 3 cups water, 10 min. Strain.' },
       { t:'Aromatics', d:'Add bruised lemongrass, 4 slices galangal, kaffir lime leaves.' },
@@ -113,7 +113,7 @@ const DISHES = [
     tag:'noodle', time:20, spicy:2, difficulty:2, kcal:620, vegan:false, meal:'lunch',
     ingredients:['noodle','shrimp','egg','garlic','tofu','fishsauce','sugar','lime'],
     desc:'Tamarind-sweet, wok-smoky. Crushed peanuts on top.',
-    rating:4.7, reviews:2340, trending:6, color:'#E8823A',
+    rating:4.7, reviews:2340, trending:6, color:'#E8823A', youtube:'https://www.youtube.com/watch?v=tI9N9_H8q5s',
     steps:[
       { t:'Soak', d:'Dried rice noodles, warm water 20 min until pliable.' },
       { t:'Sauce', d:'Tamarind + palm sugar + fish sauce, equal parts.' },

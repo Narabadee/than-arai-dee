@@ -24,6 +24,7 @@ export const Search: React.FC<SearchProps> = ({ fridge }) => {
   const [spicy, setSpicy] = useState(5);
   const [meal, setMeal] = useState('any');
   const [avoid, setAvoid] = useState<string[]>([]);
+  const [showFilters, setShowFilters] = useState(false);
 
   const results = dishes.filter(d =>
     (type === 'all' || d.tag === type) &&
@@ -37,7 +38,7 @@ export const Search: React.FC<SearchProps> = ({ fridge }) => {
   );
 
   const FilterBlock = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <div className="mb-8 last:mb-0">
+    <div className="mb-6 lg:mb-8 last:mb-0">
       <div className="font-mono text-[9px] text-nm-inkDim tracking-[0.25em] mb-3 uppercase flex items-center gap-2">
         {title}
         <div className="flex-1 h-px bg-nm-line/40" />
@@ -47,9 +48,27 @@ export const Search: React.FC<SearchProps> = ({ fridge }) => {
   );
 
   return (
-    <div className="flex flex-col lg:flex-row h-full">
+    <div className="flex flex-col lg:flex-row h-full overflow-hidden">
+      {/* MOBILE FILTER TOGGLE */}
+      <div className="lg:hidden flex items-center justify-between p-4 bg-nm-card border-b border-nm-line">
+        <div className="font-mono text-[11px] text-nm-inkDim uppercase tracking-widest">
+          {results.length} Results
+        </div>
+        <button 
+          onClick={() => setShowFilters(!showFilters)}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-nm-yellow text-nm-bg font-black text-[12px] shadow-lg shadow-nm-yellow/20 active:scale-95 transition-all"
+        >
+          <Icon.Filter size={14} />
+          {showFilters ? 'Hide Filters' : 'Show Filters'}
+        </button>
+      </div>
+
       {/* SIDEBAR FILTERS */}
-      <div className="w-full lg:w-[280px] shrink-0 bg-nm-card border-b lg:border-b-0 lg:border-r border-nm-line p-6 overflow-auto scrollbar-hide">
+      <div className={`
+        ${showFilters ? 'flex' : 'hidden'} flex-col lg:flex
+        w-full lg:w-[300px] shrink-0 bg-nm-card border-b lg:border-b-0 lg:border-r border-nm-line p-6 
+        max-h-[70vh] lg:max-h-none overflow-y-auto scrollbar-hide
+      `}>
         <div className="font-display font-black italic text-2xl mb-8 text-nm-yellow">Filters</div>
         
         <FilterBlock title="Dish type">
@@ -159,6 +178,7 @@ export const Search: React.FC<SearchProps> = ({ fridge }) => {
             })}
           </div>
         </FilterBlock>
+        <div className="h-20 lg:hidden" /> {/* MOBILE SPACER */}
       </div>
 
       {/* RESULTS AREA */}

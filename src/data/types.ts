@@ -30,6 +30,7 @@ export interface Dish {
   color: string;
   steps: Step[];
   image?: string;
+  youtube?: string;
 }
 
 export interface Post {

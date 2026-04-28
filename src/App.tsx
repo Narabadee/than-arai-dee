@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { PageFrame } from './components/layout/PageFrame';
 import { Navbar } from './components/layout/Navbar';
+import { BottomNav } from './components/layout/BottomNav';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { DEFAULT_FRIDGE } from './data/ingredients';
 import { AuthProvider, useAuth } from './context/AuthContext';
@@ -80,7 +81,7 @@ const AppRoutes: React.FC = () => {
     <PageFrame>
       <div className="flex flex-col h-screen overflow-hidden">
         <Navbar fridgeCount={fridge.length} />
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto pb-16 md:pb-0">
           <Routes>
             <Route path="/"        element={<UserRoute element={<Home fridge={fridge} />} />} />
             <Route path="/fridge"  element={<UserRoute element={<Fridge fridge={fridge} setFridge={setFridge} />} />} />
@@ -95,6 +96,7 @@ const AppRoutes: React.FC = () => {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
+        <BottomNav />
         <FloatingChats />
       </div>
     </PageFrame>

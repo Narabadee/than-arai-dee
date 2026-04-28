@@ -744,6 +744,14 @@ function NmRecipe({ id, fridge, saved, toggleSaved, setPage }) {
               all:'unset', cursor:'pointer', padding:'12px 18px', borderRadius:999,
               background:NM.red, color:NM.cream, fontSize:13, fontWeight:700,
             }}>Start cooking →</button>
+            {d.youtube && (
+              <a href={d.youtube} target="_blank" rel="noopener noreferrer" title="Watch tutor clip" style={{
+                display:'flex', alignItems:'center', justifyContent:'center', width:42, height:42, borderRadius:999,
+                background:'#FF0000', color:'#fff', boxShadow:'0 4px 12px rgba(255,0,0,0.3)'
+              }}>
+                <Icon.Youtube size={20}/>
+              </a>
+            )}
             <button onClick={() => toggleSaved(d.id)} style={{
               all:'unset', cursor:'pointer', padding:'12px 16px', borderRadius:999,
               border:`1.5px solid ${isSaved ? NM.red : NM.line}`, color: isSaved ? NM.red : NM.ink,

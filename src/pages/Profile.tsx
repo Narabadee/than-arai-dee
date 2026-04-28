@@ -239,8 +239,8 @@ export const Profile: React.FC = () => {
           </div>
 
           {/* Profile info */}
-          <div className="px-6 md:px-12 pb-0 relative">
-            <div className="flex flex-col md:flex-row items-end gap-6 -mt-12 md:-mt-16 mb-6">
+          <div className="px-4 md:px-12 pb-0 relative">
+            <div className="flex flex-col md:flex-row items-center md:items-end gap-4 md:gap-6 -mt-16 md:-mt-16 mb-6 text-center md:text-left">
               {/* Avatar */}
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-nm-bg bg-nm-bg p-1 shadow-2xl relative z-10 shrink-0">
                 <div
@@ -257,10 +257,10 @@ export const Profile: React.FC = () => {
 
               {/* Name + stats */}
               <div className="flex-1 mb-2">
-                <h1 className="font-display font-black italic text-4xl md:text-5xl text-nm-yellow glow-yellow mb-1">
+                <h1 className="font-display font-black italic text-3xl md:text-5xl text-nm-yellow glow-yellow mb-1">
                   {profile.display_name || profile.username}
                 </h1>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-nm-inkDim font-mono text-[12px]">
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1 text-nm-inkDim font-mono text-[11px] md:text-[12px]">
                   <span className="font-bold text-nm-cream">{profile.username}</span>
                   <span className="opacity-30">·</span>
                   <span className="font-bold text-nm-cream">{(profile.total_likes || 0).toLocaleString()} Likes</span>
@@ -304,7 +304,7 @@ export const Profile: React.FC = () => {
               </div>
             </div>
 
-            <div className="max-w-2xl text-nm-ink text-[15px] leading-relaxed opacity-80 mb-6 border-l-2 border-nm-yellow/30 pl-5 py-1">
+            <div className="max-w-2xl text-nm-ink text-[14px] md:text-[15px] leading-relaxed opacity-80 mb-6 border-l-0 md:border-l-2 border-nm-yellow/30 md:pl-5 py-1 text-center md:text-left">
               {profile.bio}
               {profile.location && (
                 <div className="flex items-center gap-1.5 mt-2 font-mono text-[10px] text-nm-inkDim uppercase tracking-widest">
@@ -314,7 +314,7 @@ export const Profile: React.FC = () => {
             </div>
 
             {/* Tabs */}
-            <div className="flex border-t border-nm-line/50 pt-2">
+            <div className="flex border-t border-nm-line/50 pt-2 overflow-x-auto scrollbar-hide">
               {[
                 { id: 'posts', label: 'Feed' },
                 { id: 'recipes', label: 'Recipes' },

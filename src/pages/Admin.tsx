@@ -205,6 +205,7 @@ const RecipesTab: React.FC = () => {
   const [formDesc, setFormDesc] = useState('');
   const [formIngredients, setFormIngredients] = useState('');
   const [formImage, setFormImage] = useState('');
+  const [formYoutube, setFormYoutube] = useState('');
   const [formStatus, setFormStatus] = useState('Stable');
   const [formSteps, setFormSteps] = useState<{ t: string; d: string }[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -245,6 +246,7 @@ const RecipesTab: React.FC = () => {
         desc: formDesc.trim(), ingredients: formIngredients.split(',').map(s => s.trim().toLowerCase()).filter(Boolean),
         steps: formSteps.filter(s => s.t.trim() || s.d.trim()),
         image: formImage.trim() || undefined,
+        youtube: formYoutube.trim() || undefined,
         status: formStatus,
       };
 
@@ -277,7 +279,7 @@ const RecipesTab: React.FC = () => {
   const resetForm = () => {
     setFormEn(''); setFormTh(''); setFormTag('stirfry'); setFormTime(20);
     setFormSpicy(2); setFormDiff(1); setFormKcal(400); setFormDesc(''); 
-    setFormIngredients(''); setFormImage(''); setFormStatus('Stable');
+    setFormIngredients(''); setFormImage(''); setFormYoutube(''); setFormStatus('Stable');
     setFormSteps([{ t: '', d: '' }]);
     setEditingId(null); setFormError('');
   };
@@ -293,6 +295,7 @@ const RecipesTab: React.FC = () => {
     setFormDesc(dish.desc);
     setFormIngredients(dish.ingredients.join(', '));
     setFormImage(dish.image || '');
+    setFormYoutube(dish.youtube || '');
     setFormStatus((dish as any).status || 'Stable');
     setFormSteps(dish.steps && dish.steps.length > 0 ? dish.steps : [{ t: '', d: '' }]);
     setEditingId(dish.id);
@@ -395,7 +398,10 @@ const RecipesTab: React.FC = () => {
                 <div><label className="font-mono text-[10px] text-nm-inkDim tracking-widest uppercase mb-1 block">Calories</label><input type="number" value={formKcal} onChange={e => setFormKcal(Number(e.target.value))} min={0} className="w-full bg-nm-bg border border-nm-line rounded-xl px-3 py-2.5 text-[13px] text-nm-ink focus:outline-none focus:border-nm-yellow/50 transition-colors" /></div>
                 <div><label className="font-mono text-[10px] text-nm-inkDim tracking-widest uppercase mb-1 block">Status</label><select value={formStatus} onChange={e => setFormStatus(e.target.value)} className="w-full bg-nm-bg border border-nm-line rounded-xl px-3 py-2.5 text-[13px] text-nm-ink focus:outline-none focus:border-nm-yellow/50 transition-colors">{STATUS_OPTIONS.map(s => <option key={s} value={s}>{s}</option>)}</select></div>
               </div>
-              <div><label className="font-mono text-[10px] text-nm-inkDim tracking-widest uppercase mb-1 block">Image URL / Path</label><input value={formImage} onChange={e => setFormImage(e.target.value)} placeholder="images/dishes/new.png" className="w-full bg-nm-bg border border-nm-line rounded-xl px-3 py-2.5 text-[13px] text-nm-ink focus:outline-none focus:border-nm-yellow/50 transition-colors" /></div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div><label className="font-mono text-[10px] text-nm-inkDim tracking-widest uppercase mb-1 block">Image URL / Path</label><input value={formImage} onChange={e => setFormImage(e.target.value)} placeholder="images/dishes/new.png" className="w-full bg-nm-bg border border-nm-line rounded-xl px-3 py-2.5 text-[13px] text-nm-ink focus:outline-none focus:border-nm-yellow/50 transition-colors" /></div>
+                <div><label className="font-mono text-[10px] text-nm-inkDim tracking-widest uppercase mb-1 block">YouTube Tutor Link</label><input value={formYoutube} onChange={e => setFormYoutube(e.target.value)} placeholder="https://www.youtube.com/watch?v=..." className="w-full bg-nm-bg border border-nm-line rounded-xl px-3 py-2.5 text-[13px] text-nm-ink focus:outline-none focus:border-nm-yellow/50 transition-colors" /></div>
+              </div>
               <div><label className="font-mono text-[10px] text-nm-inkDim tracking-widest uppercase mb-1 block">Ingredients * <span className="normal-case tracking-normal text-[10px]">(comma-separated IDs: chicken, garlic, chili)</span></label><input value={formIngredients} onChange={e => setFormIngredients(e.target.value)} placeholder="chicken, garlic, chili, fishsauce" className="w-full bg-nm-bg border border-nm-line rounded-xl px-4 py-2.5 text-[13px] text-nm-ink placeholder-nm-inkDim focus:outline-none focus:border-nm-yellow/50 transition-colors" /></div>
               <div><label className="font-mono text-[10px] text-nm-inkDim tracking-widest uppercase mb-1 block">Description *</label><textarea value={formDesc} onChange={e => setFormDesc(e.target.value)} rows={2} placeholder="Brief description of the dish…" className="w-full bg-nm-bg border border-nm-line rounded-xl px-4 py-2.5 text-[13px] text-nm-ink placeholder-nm-inkDim focus:outline-none focus:border-nm-yellow/50 transition-colors resize-none" /></div>
 

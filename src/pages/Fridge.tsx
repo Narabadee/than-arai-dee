@@ -15,6 +15,7 @@ export const Fridge: React.FC<FridgeProps> = ({ fridge, setFridge }) => {
   const navigate = useNavigate();
   const { dishes } = useAllDishes();
   const [query, setQuery] = useState('');
+  const [showSummary, setShowSummary] = useState(false);
 
   const cats = [...new Set(INGREDIENTS.map(i => i.cat))];
 
@@ -98,8 +99,30 @@ export const Fridge: React.FC<FridgeProps> = ({ fridge, setFridge }) => {
         </div>
       </div>
 
+      {/* MOBILE SUMMARY TOGGLE */}
+      <div className="lg:hidden fixed bottom-16 left-0 right-0 p-4 bg-nm-card border-t border-nm-line z-40 flex items-center justify-between shadow-2xl">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-nm-yellow flex items-center justify-center font-black text-nm-bg shadow-lg shadow-nm-yellow/20">
+            {fridge.length}
+          </div>
+          <div>
+            <div className="text-[12px] font-black text-nm-ink">My Fridge</div>
+            <div className="text-[10px] text-nm-inkDim uppercase tracking-wider">{matched} matches</div>
+          </div>
+        </div>
+        <button 
+          onClick={() => setShowSummary(!showSummary)}
+          className="px-5 py-2.5 rounded-xl bg-nm-inkHi text-nm-cream font-black text-[11px] uppercase tracking-widest active:scale-95 transition-all border border-white/10"
+        >
+          {showSummary ? 'Close' : 'View Contents'}
+        </button>
+      </div>
+
       {/* SIDE PANEL */}
-      <div className="w-full lg:w-[360px] bg-nm-card border-t lg:border-t-0 lg:border-l border-nm-line p-8 flex flex-col gap-8 shadow-2xl z-10">
+      <div className={`
+        ${showSummary ? 'fixed inset-0 top-0 bottom-32 z-50 flex' : 'hidden'} lg:flex
+        w-full lg:w-[360px] bg-nm-card border-t lg:border-t-0 lg:border-l border-nm-line p-8 flex flex-col gap-8 shadow-2xl overflow-auto
+      `}>
         <div>
           <div className="font-mono text-[10px] text-nm-inkDim tracking-[0.25em] mb-4 uppercase">YOUR FRIDGE CONTENTS</div>
           <div className="bg-nm-bg/50 border-2 border-dashed border-nm-line rounded-2xl p-5 min-h-[200px] flex flex-wrap gap-2 content-start relative overflow-hidden">

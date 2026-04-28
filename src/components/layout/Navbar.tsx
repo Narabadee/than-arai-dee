@@ -57,7 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({ fridgeCount }) => {
       </Link>
 
       {/* NAV */}
-      <nav className="flex gap-0.5 overflow-x-auto scrollbar-hide ml-auto">
+      <nav className="hidden md:flex gap-0.5 overflow-x-auto scrollbar-hide ml-auto">
         {isAdmin ? (
           // Admin tabs — use Link + manual active detection
           ADMIN_TABS.map(t => (

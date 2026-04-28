@@ -26,7 +26,7 @@ usersRouter.get('/cooks', (_req: Request, res: Response) => {
 });
 
 usersRouter.get('/profile/:username', (req: Request, res: Response) => {
-  const username = req.params.username.replace('@', '').toLowerCase();
+  const username = (req.params.username as string).replace('@', '').toLowerCase();
   const profile = db.prepare('SELECT * FROM cooks WHERE LOWER(username) = ? OR id = ?').get(`@${username}`, username) as any;
   if (!profile) return res.status(404).json({ error: 'Profile not found' });
   

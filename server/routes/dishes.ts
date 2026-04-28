@@ -29,7 +29,7 @@ dishesRouter.post('/', (req: Request, res: Response) => {
   const user = getAuthUser(req);
   if (user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
 
-  const { en, th, tag, time, spicy, difficulty, kcal, desc, ingredients, steps, image } = req.body;
+  const { en, th, tag, time, spicy, difficulty, kcal, desc, ingredients, steps, image, youtube } = req.body;
   if (!en || !desc || !ingredients) return res.status(400).json({ error: 'en, desc, and ingredients are required.' });
 
   const COLORS = ['#D64528','#E8823A','#E8B13A','#4A7A3E','#F4C13D','#B8D63D','#9B59B6'];
@@ -37,9 +37,9 @@ dishesRouter.post('/', (req: Request, res: Response) => {
   const color = COLORS[Math.floor(Math.random() * COLORS.length)];
 
   db.prepare(`
-    INSERT INTO dishes (id,en,th,tag,time,spicy,difficulty,kcal,vegan,meal,desc,rating,reviews,color,image,status,source)
-    VALUES (?,?,?,?,?,?,?,?,0,'lunch',?,4.5,0,?,?,'Stable','admin')
-  `).run(id, en.trim(), (th||en).trim(), tag||'stirfry', time||20, spicy||2, difficulty||1, kcal||400, desc.trim(), color, image||null);
+    INSERT INTO dishes (id,en,th,tag,time,spicy,difficulty,kcal,vegan,meal,desc,rating,reviews,color,image,status,source,youtube)
+    VALUES (?,?,?,?,?,?,?,?,0,'lunch',?,4.5,0,?,?,?,'Stable','admin',?)
+  `).run(id, en.trim(), (th||en).trim(), tag||'stirfry', time||20, spicy||2, difficulty||1, kcal||400, desc.trim(), color, image||null, youtube||null);
 
   const ing: string[] = Array.isArray(ingredients)
     ? ingredients
@@ -72,14 +72,14 @@ dishesRouter.put('/:id', (req: Request, res: Response) => {
   const user = getAuthUser(req);
   if (user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
 
-  const { en, th, tag, time, spicy, difficulty, kcal, desc, ingredients, steps, image, status } = req.body;
+  const { en, th, tag, time, spicy, difficulty, kcal, desc, ingredients, steps, image, status, youtube } = req.body;
   
   // Update main table
   db.prepare(`
     UPDATE dishes 
-    SET en = ?, th = ?, tag = ?, time = ?, spicy = ?, difficulty = ?, kcal = ?, desc = ?, image = ?, status = ?
+    SET en = ?, th = ?, tag = ?, time = ?, spicy = ?, difficulty = ?, kcal = ?, desc = ?, image = ?, status = ?, youtube = ?
     WHERE id = ?
-  `).run(en, th, tag, time, spicy, difficulty, kcal, desc, image || null, status || 'Stable', req.params.id);
+  `).run(en, th, tag, time, spicy, difficulty, kcal, desc, image || null, status || 'Stable', youtube || null, req.params.id);
 
   // Update ingredients if provided
   if (ingredients) {

@@ -154,13 +154,26 @@ export const RecipeDetail: React.FC<RecipeDetailProps> = ({ fridge, saved, toggl
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-4 mt-auto">
+          <div className="flex flex-wrap items-center gap-4 mt-auto">
             <button
               onClick={startCooking}
               className="flex-1 min-w-[200px] py-4 rounded-full bg-nm-red text-nm-cream font-black text-[16px] shadow-xl shadow-nm-red/20 hover:brightness-110 active:scale-95 transition-all"
             >
               Start cooking →
             </button>
+
+            {d.youtube && (
+              <a
+                href={d.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-[58px] h-[58px] rounded-full bg-[#FF0000] text-white shadow-xl shadow-red-600/20 hover:brightness-110 active:scale-95 transition-all"
+                title="Watch tutor clip on YouTube"
+              >
+                <Icon.Youtube size={28} />
+              </a>
+            )}
+
             <button
               onClick={() => requireAuth(() => toggleSaved(d.id))}
               className={`
