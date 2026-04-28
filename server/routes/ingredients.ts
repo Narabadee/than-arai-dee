@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { db } from '../database.js';
+import { sql } from '../db.js';
 
 export const ingredientsRouter = Router();
 
-ingredientsRouter.get('/', (_req, res) => {
-  res.json(db.prepare('SELECT * FROM ingredients').all());
+ingredientsRouter.get('/', async (_req, res) => {
+  try {
+    res.json(await sql`SELECT * FROM ingredients`);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to fetch ingredients' });
+  }
 });

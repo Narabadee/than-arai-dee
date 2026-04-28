@@ -1,19 +1,20 @@
 import { Request } from 'express';
-import { db } from './database.js';
+import { sql } from './db.js';
 
 export interface SessionUser {
   id: string;
   username: string;
   color: string;
   role: string;
-  banned: number;
+  banned: boolean;
 }
 
-export function getAuthUser(req: Request): SessionUser | null {
+export async function getAuthUser(req: Request): Promise<SessionUser | null> {
   const auth = req.headers.authorization;
   if (!auth?.startsWith('Bearer ')) return null;
   const token = auth.slice(7);
-  const session = db.prepare('SELECT user_id FROM sessions WHERE token = ?').get(token) as { user_id: string } | undefined;
+  const [session] = await sql<{ user_id: string }[]>`SELECT user_id FROM sessions WHERE token = ${token}`;
   if (!session) return null;
-  return db.prepare('SELECT * FROM users WHERE id = ?').get(session.user_id) as SessionUser | null;
+  const [user] = await sql<SessionUser[]>`SELECT * FROM users WHERE id = ${session.user_id}`;
+  return user ?? null;
 }
