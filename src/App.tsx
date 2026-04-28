@@ -37,8 +37,8 @@ const UserRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
 // Inner component so it can use useAuth()
 const AppRoutes: React.FC = () => {
   const { user } = useAuth();
-  const [lsFridge, setLsFridge] = useLocalStorage<string[]>('nm-fridge', DEFAULT_FRIDGE);
-  const [lsSaved, setLsSaved] = useLocalStorage<string[]>('nm-saved', []);
+  const [lsFridge, setLsFridge] = useLocalStorage<string[]>('nm-fridge-v2', DEFAULT_FRIDGE);
+  const [lsSaved, setLsSaved] = useLocalStorage<string[]>('nm-saved-v2', []);
   const [dbFridge, setDbFridge] = useState<string[] | null>(null);
   const [dbSaved, setDbSaved] = useState<string[] | null>(null);
 
